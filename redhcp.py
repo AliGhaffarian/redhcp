@@ -56,7 +56,7 @@ def list_interface_names():
 
 def restart_interface(interface_name):
     try:
-        ipr.poll(ipr.link, 'set', ifname=interface_name, stete = 'down', timeout = config['poll_timeout'])
+        ipr.poll(ipr.link, 'set', ifname=interface_name, state = 'down', timeout = config['poll_timeout'])
         ipr.poll(ipr.link, 'set', ifname=interface_name, state ='up', timeout = config['poll_timeout'])
         logger.info(f"[+] restarting interface {interface_name=} successful")
         return True
