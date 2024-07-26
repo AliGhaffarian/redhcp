@@ -112,8 +112,14 @@ def main():
     stdout_handler.setLevel(args.log_level)
     logger.debug(f"got args: {args}")
     
-    interfaces = []
+    #if not rooti, exit 
+    if os.geteuid() != 0:
+        logger.error("This script must be run as root.")
+        sys.exit(1)
 
+   
+    interfaces = []
+    
     if args.include_only is not None:
         interfaces = args.include_only.split(',')
 
