@@ -92,7 +92,7 @@ def handle_args():
         ./redhcp.py -x lo
 
         execute for eth0 and wlan0 (don't lookup for interfaces) 
-        ./redhcp.py -l eth0,wlan0
+        ./redhcp.py -i eth0,wlan0
     """
     parser = argparse.ArgumentParser(
             description="program to restart and dhcp-renew your interfaces fast, uses dhclient for dhcp",
@@ -114,8 +114,7 @@ def main():
     
     #if not rooti, exit 
     if os.geteuid() != 0:
-        logger.error("This script must be run as root.")
-        sys.exit(1)
+        exit(os.system(f"sudo {sys.argv[0]} {' '.join(sys.argv[1:])}"))
 
    
     interfaces = []
